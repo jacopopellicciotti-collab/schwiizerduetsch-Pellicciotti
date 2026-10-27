@@ -81,11 +81,85 @@ $("cancella-chiave").addEventListener("click", () => {
 caricaModelli();
 
 // richiesta
+// menu a tendina: [gruppo, [[etichetta, testo per Gemini], ...]]
+const AMBITI = [
+  ["Incontri", [
+    ["Saluti e congedi", "saluti e congedi: Grüezi, Hoi, Sali, Guete Morge/Tag/Namittag, Guete-n-Aabig, Guet Nacht, Uf widerluege, Adieu, Bis spöter, Mer gseet sich, No en schöne Tag"],
+    ["Presentarsi", "presentarsi: de Name, häisse, Fröit mich, känne lärne, Duzis mache, du und Si"],
+    ["Provenienza e nazionalità", "provenienza e nazionalità: vo wo, chume us, Amerikaner(in), Schwiizer(in), vo Basel, d'Schwiiz"],
+    ["Cortesia e scuse", "cortesia: bitte, danke, merci vilmal, gärn gschee, exgüse, Entschuldigung, sind Si so guet, (Es) tuet mir läid, Chönt ich?, Törf ich?, nätt, hilfsberäit"],
+    ["Lingue e capirsi", "lingue e capirsi: verstaa, Schwiizerdütsch, Schriftdütsch, Änglisch, Französisch, widerhole, nomal langsam säge, rede"],
+    ["Stare bene o male", "come stai: Wie gat's?, guet, nöd so guet, scho rächt, und Ine/dir?"],
+  ]],
+  ["Vita quotidiana", [
+    ["Abitare e lavorare", "abitare e lavorare: wone, schaffe, z'Bärn, z'Basel, i de Märtgass, Wie lang sind Si scho da?, s Jaar"],
+    ["Al ristorante e al bar", "al ristorante e al bar: de Kafi, s Bier, de Wii, s Mineralwasser, d'Charte, s Tagesmenü, d'Suppe, de Salaat, Gschnätzlets, d'Röschti, s Gipfeli, s Brötli, En Guete, Zale bitte, ässe, trinke, Was hätted Si gärn?"],
+    ["Soldi, numeri e ore", "numeri, prezzi e ore: de Franke, zä, füfzg, zwäi, am zäni, am halbi zwäi"],
+    ["In città: strade e direzioni", "orientarsi in città: d'Bahnhofstrass, d'Märtgass, rächts, links, graduus, Wo dure gat's?, s Spital, s Kafi"],
+    ["Casa e cucina", "casa e cucina: s Chuchichäschtli, s Gschiir, de Balkon, d'Ussicht, s Lavabo, s Cheminée, gäbig"],
+  ]],
+  ["Gusti e tempo libero", [
+    ["Tempo libero e passioni", "tempo libero e gusti: d'Fräiziit, d'Lieblingsmusig, gärn haa, liebe, sich interessiere für"],
+    ["Il tempo che fa e cosa piace", "tempo atmosferico e gradimento: s Wätter, schön, schlächt, wunderbar, gfallt mir, Wie gfallt's Ine?, d'Saison"],
+  ]],
+  ["Parole particolari", [
+    ["Prestiti francesi", "prestiti dal francese con accento sulla prima sillaba: s Velo, de Coiffeur, s Poulet, s Cheminée, de Kondukteur, s Lavabo, de Dessert, d'Saison, merci, Adieu"],
+    ["Diminutivi in -li", "parole in -li: s Gipfeli, s Brötli, s Schätzli, s Chätzli, s Chuchichäschtli"],
+  ]],
+];
+const VERBI_GRUPPI = [
+  ["Ausiliari", ["sii", "haa", "wärde"]],
+  ["Verbi modali", ["chöne", "müese", "wele", "söle", "törfe", "möge"]],
+  ["Condizionali di cortesia", ["wett", "hätt", "chönt", "wär", "törft"]],
+  ["Movimento", ["gaa", "choo", "fare", "laufe"]],
+  ["Parlare e capire", ["säge", "rede", "verstaa", "frage", "widerhole"]],
+  ["Vita quotidiana", ["wone", "schaffe", "ässe", "trinke", "mache", "tue", "zale"]],
+  ["Gusti e conoscenze", ["gfalle", "liebe", "gärn haa", "känne", "lärne", "häisse"]],
+];
+const FORME_GRUPPI = [
+  ["Verbi", [
+    ["Presente e plurale in -ed", "presente, con il plurale unico in -ed (mir/ir/si woned)"],
+    ["Perfetto", "perfetto con haa/sii e participi con g- (niente preterito)"],
+    ["Congiuntivo di cortesia", "congiuntivo II di cortesia: wett, hätt, chönt, törft, wär"],
+    ["Pronomi fusi col verbo", "pronomi atoni fusi col verbo (häsch, chasch, wämmer, Chönti, Törfi)"],
+    ["am + infinito, go + infinito", "forma progressiva am + infinito (ich bi am Ässe) e gaa go + infinito"],
+  ]],
+  ["Nomi e pronomi", [
+    ["Articoli e casi", "articoli de/d'/s, en/e/es e dativo (em, de, emene, ere); nominativo = accusativo"],
+    ["Pronomi personali", "pronomi personali pieni e atoni (mir/mer, Si/Ine, dich/dir)"],
+    ["Possessivi", "possessivi (min/mini/mis, din, Ire, dativo Irere/dinere)"],
+    ["Aggettivi", "aggettivi predicativi invariati e attributivi (en schöne Tag, e gäbigi Lösig, es schöns …)"],
+    ["Diminutivo -li", "diminutivo in -li, neutro e con Umlaut"],
+    ["Numeri e ore", "numeri e ore (am zäni, am halbi zwäi)"],
+  ]],
+  ["Sintassi", [
+    ["Domande", "domande: wär, wäm, was, wo, wohi/woane, vo wo, für was, verbo in prima posizione"],
+    ["Negazione", "negazione nöd, käi"],
+    ["Secondarie", "ordine nella secondaria: modale prima dell'infinito (wott erledige), relativo wo"],
+    ["Luoghi: z', i, vo", "luoghi e provenienza: z'Bärn, i de Schwiiz, vo Basel"],
+    ["z' + infinito", "z' + infinito (känne z'lärne)"],
+  ]],
+];
+function tendine(id, gruppi) {
+  const box = $(id);
+  gruppi.forEach(([nome, voci]) => {
+    const d = document.createElement("details"); d.className = "tendina";
+    d.innerHTML = `<summary>${esc(nome)}<span class="conta"></span></summary><div class="spunte">` +
+      voci.map(v => { const [et, val] = Array.isArray(v) ? v : [v, v];
+        return `<label title="${esc(val)}"><input type="checkbox" value="${esc(val)}">${esc(et)}</label>`; }).join("") + `</div>`;
+    d.addEventListener("change", () => { const n = d.querySelectorAll("input:checked").length; d.querySelector(".conta").textContent = n ? `· ${n}` : ""; });
+    box.appendChild(d);
+  });
+}
+tendine("r-ambiti", AMBITI); tendine("r-verbi-gruppi", VERBI_GRUPPI); tendine("r-forme", FORME_GRUPPI);
+
 const spuntate = id => [...document.querySelectorAll(`#${id} input:checked`)].map(i => i.value);
 $("genera").addEventListener("click", async () => {
   const tipi = spuntate("r-tipi");
   const richiesta = {
-    tema: $("r-tema").value.trim(), verbi: $("r-verbi").value.trim(), forme: spuntate("r-forme"),
+    tema: [...spuntate("r-ambiti"), $("r-tema").value.trim()].filter(Boolean).join("; "),
+    verbi: [...spuntate("r-verbi-gruppi"), $("r-verbi").value.trim()].filter(Boolean).join(", "),
+    forme: [...spuntate("r-forme"), $("r-forme-libere").value.trim()].filter(Boolean),
     tipi, quanti: $("r-quanti").value, note: $("r-note").value.trim(),
   };
   const testo = [

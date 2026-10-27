@@ -502,22 +502,15 @@
 
   <div class="box prova modulo">
     <div class="etichetta">Che cosa vuoi allenare</div>
-    <label>Tema lessicale <input id="r-tema" placeholder="es. al ristorante, il lavoro, il tempo libero"></label>
-    <label>Verbi <input id="r-verbi" placeholder="es. chöne, wele, gaa"></label>
+    <p>Ambiti lessicali <span class="sotto">(raggruppati dalle tue carte)</span></p>
+    <div class="tendine" id="r-ambiti"></div>
+    <label>Altro tema <input id="r-tema" placeholder="scrivi qui un tema che non è nei menu"></label>
+    <p>Verbi</p>
+    <div class="tendine" id="r-verbi-gruppi"></div>
+    <label>Altri verbi <input id="r-verbi" placeholder="es. bringe, warte"></label>
     <p>Forme grammaticali</p>
-    <div class="spunte" id="r-forme">
-      <label><input type="checkbox" value="plurale verbale unico in -ed (mir/ir/si woned)">plurale in -ed</label>
-      <label><input type="checkbox" value="perfetto con haa/sii e participi con g- (niente preterito)">perfetto</label>
-      <label><input type="checkbox" value="congiuntivo II di cortesia: wett, hätt, chönt, törft">congiuntivo di cortesia</label>
-      <label><input type="checkbox" value="pronomi atoni e fusi col verbo (häsch, chasch, wämmer, Chönti)">pronomi atoni</label>
-      <label><input type="checkbox" value="articoli de/d'/s, en/e/es e dativo (em, de, emene, ere)">articoli e casi</label>
-      <label><input type="checkbox" value="pronomi personali e possessivi (mir/mer, Ine, min/mini/mis, Irere)">pronomi e possessivi</label>
-      <label><input type="checkbox" value="diminutivo in -li">diminutivo -li</label>
-      <label><input type="checkbox" value="ordine nella secondaria: modale prima dell'infinito (wott erledige), relativo wo">secondarie</label>
-      <label><input type="checkbox" value="luoghi e provenienza: z'Bärn, i de Schwiiz, vo Basel">z', i, vo</label>
-      <label><input type="checkbox" value="negazione nöd, käi">negazione</label>
-      <label><input type="checkbox" value="domande: wär, wäm, wo, wohi, vo wo, für was">domande</label>
-    </div>
+    <div class="tendine" id="r-forme"></div>
+    <label>Altre forme <input id="r-forme-libere" placeholder="es. imperativo, comparativo"></label>
     <p>Tipi di esercizio</p>
     <div class="spunte" id="r-tipi">
       <label><input type="checkbox" value="dialogo" checked>dialogo</label>

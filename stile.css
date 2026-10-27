@@ -162,3 +162,11 @@ td.de { background: var(--de-bg); }
 .voce-storico { display: flex; gap: 8px; align-items: center; margin: 4px 0; }
 .voce-storico button { border: 0; border-radius: 8px; padding: 3px 10px; cursor: pointer; background: var(--carta); text-align: left; }
 .voce-storico .via { color: var(--tenue); }
+.tendine { display: flex; flex-direction: column; gap: 6px; }
+.tendina { background: var(--carta); border-radius: 10px; padding: 4px 12px; }
+.tendina summary { cursor: pointer; padding: 2px 0; }
+.tendina summary .conta { color: var(--ch); margin-left: 6px; }
+.tendina[open] summary { margin-bottom: 6px; }
+.tendina .spunte { padding-bottom: 8px; }
+.tendina .spunte label { background: var(--prova); }
+.tendina .parole-ambito { display: block; font-size: 13px; color: var(--tenue); }
