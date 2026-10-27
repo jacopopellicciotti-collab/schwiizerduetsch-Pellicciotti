@@ -521,8 +521,20 @@
     </div>
     <label>Quanti esercizi <select id="r-quanti"><option>6</option><option selected>10</option><option>15</option><option>20</option></select></label>
     <label>Altre richieste <textarea id="r-note" rows="2" placeholder="es. dialogo tra due colleghi, usa il Lei"></textarea></label>
-    <p><button class="pulsante" id="genera">Genera</button></p>
+    <p><button class="pulsante" id="genera">Genera esercizi</button>
+      <button class="pulsante" id="chat-via">Conversa dal vivo</button></p>
+    <div class="sotto">«Conversa dal vivo» usa gli stessi menu (tema, verbi, forme). In «Altre richieste» puoi indicare ruolo e situazione, es. «sei un cameriere, io sono un cliente».</div>
     <div class="esito" id="stato"></div>
+  </div>
+
+  <div class="box confronto" id="chat" hidden>
+    <div class="etichetta">Conversazione dal vivo · tocca una battuta per Hochdeutsch e italiano</div>
+    <div id="chat-log"></div>
+    <p><textarea id="chat-input" rows="2" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Rispondi in zurighese (se non sai, scrivi in italiano). Invio per mandare"></textarea></p>
+    <p><button class="pulsante" id="chat-invia">Invia</button>
+      <button class="pulsante" id="chat-suggerisci">Suggerimento</button>
+      <button class="pulsante" id="chat-fine">Termina e riepilogo</button></p>
+    <div class="esito" id="chat-stato"></div>
   </div>
 
   <div id="risultato"></div>

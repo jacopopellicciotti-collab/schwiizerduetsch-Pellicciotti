@@ -162,6 +162,11 @@ td.de { background: var(--de-bg); }
 .voce-storico { display: flex; gap: 8px; align-items: center; margin: 4px 0; }
 .voce-storico button { border: 0; border-radius: 8px; padding: 3px 10px; cursor: pointer; background: var(--carta); text-align: left; }
 .voce-storico .via { color: var(--tenue); }
+#chat[hidden] { display: none; }
+#chat-log .es, #chat-log .box { margin: 8px 0; }
+#chat-log .box { font-size: 16px; }
+.msg-tu { margin: 8px 0 8px auto; max-width: 85%; border-radius: 10px; padding: 8px 12px; background: var(--ch-bg); color: var(--ch); width: fit-content; }
+#chat-input { width: 100%; max-width: none; border: 0; border-radius: 8px; padding: 5px 10px; background: var(--carta); }
 .tendine { display: flex; flex-direction: column; gap: 6px; }
 .tendina { background: var(--carta); border-radius: 10px; padding: 4px 12px; }
 .tendina summary { cursor: pointer; padding: 2px 0; }

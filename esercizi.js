@@ -14,7 +14,8 @@ Regole da rispettare sempre:
 - Spiegazioni in italiano, brevi (una o due frasi), con il confronto con lo Hochdeutsch quando aiuta.
 - Esercizi "lacuna" e "scelta": il campo frase contiene esattamente un ___ e la soluzione è solo la parte mancante; per "scelta" dai 3 o 4 opzioni, una giusta uguale alla soluzione.
 - Esercizi "traduzione": frase italiana in campo it, soluzione in svizzero. Esercizi "ordine": soluzione è la frase svizzera intera (massimo 9 parole).
-- In accettate metti altre risposte corrette equivalenti, se ce ne sono.
+- In accettate metti altre risposte corrette equivalenti, se ce ne sono, comprese le varianti di grafia non Dieth che lo studente può aver imparato dal libro Hoi Zäme (-ä, uä) o da Pimsleur (grafia all'americana: Sii, wii, gaht, ...).
+- Grafia: tu scrivi sempre in Dieth, ma NON correggere la grafia dello studente se la forma è comprensibile e riconoscibile (Hoi Zäme, Pimsleur, altre grafie plausibili): è tollerata. Correggi solo errori veri di forma, lessico o ordine delle parole; al massimo, se utile, aggiungi tra parentesi la grafia Dieth, senza segnarla come errore.
 - parole_nuove: solo parole che non sono nelle carte, nella forma base (sostantivi con articolo, verbi all'infinito); niente coniugazioni.
 - Coniugazioni: usa esattamente queste forme zurighesi (presente ich, du, er/si/es, mir, ir, si; participio). Se usi un verbo che non è qui, coniugalo allo stesso modo (plurale in -ed, 2a persona in -sch):
 ${VERBI.map(v => `${v.inf}: ${v.ch.join(", ")}; participio ${v.p}`).join("\n")}
@@ -40,11 +41,13 @@ const SCHEMA = {
   required: ["titolo", "esercizi"],
 };
 
-async function gemini(testo, schema) {
+// contents: conversazione già avviata (turni user/model); sistema: istruzioni da aggiungere a ISTRUZIONI
+async function gemini(testo, schema, contents, sistema) {
   const chiave = leggi("gemini-chiave");
   if (!chiave) throw new Error("Prima inserisci e salva la chiave API.");
   const modello = ($("modello").value.trim() || MODELLO_BASE).replace(/^models\//, "");
-  const corpo = { systemInstruction: { parts: [{ text: ISTRUZIONI }] }, contents: [{ role: "user", parts: [{ text: testo }] }],
+  const corpo = { systemInstruction: { parts: [{ text: ISTRUZIONI + (sistema ? "\n\n" + sistema : "") }] },
+                  contents: contents || [{ role: "user", parts: [{ text: testo }] }],
                   generationConfig: { temperature: 0.8, ...(schema ? { responseMimeType: "application/json", responseSchema: schema } : {}) } };
   const r = await fetch(`${API}/models/${encodeURIComponent(modello)}:generateContent`, {
     method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": chiave }, body: JSON.stringify(corpo) });
@@ -185,6 +188,89 @@ $("genera").addEventListener("click", async () => {
   $("genera").disabled = false;
 });
 
+// conversazione dal vivo: Gemini recita un ruolo, risponde battuta per battuta e corregge
+const CHAT_ISTRUZIONI = `MODALITÀ CONVERSAZIONE DAL VIVO (roleplay).
+- Recita il ruolo e la situazione indicati, rimanendo nel personaggio. Nessuna battuta è predefinita: rispondi a ciò che lo studente scrive davvero.
+- Ogni tua battuta è breve (una o due frasi, livello A1-A2), usa il lessico, i verbi e le forme richiesti e poi chiude con una domanda o un invito, perché lo studente risponda.
+- Campi: ch = la tua battuta in zurighese Dieth; de = la stessa in Hochdeutsch; it = in italiano.
+- Lo studente scrive in zurighese, ma può scrivere in tedesco o in italiano quando non sa dirlo. Campo correzione: se ha scritto in zurighese con errori di forma, lessico o ordine (NON di grafia: le grafie Hoi Zäme, Pimsleur o altre comprensibili vanno bene, non correggerle), dai la frase corretta e una spiegazione di una riga in italiano. Se ha scritto in italiano o in Hochdeutsch, scrivi «Si dice: …» con la frase zurighese. Se la frase è giusta, lascia correzione vuota.
+- Campo suggerimento: solo se utile, un'idea in italiano su cosa potrebbe rispondere; altrimenti vuoto.
+- Non uscire dal ruolo e non spiegare in tedesco: le spiegazioni vanno solo nel campo correzione, in italiano.`;
+const CHAT_SCHEMA = { type: "OBJECT", properties: { ch: S("STRING"), de: S("STRING"), it: S("STRING"), correzione: S("STRING"), suggerimento: S("STRING") }, required: ["ch", "de", "it"] };
+let chat = null;
+const turno = (ruolo, testo) => ({ role: ruolo, parts: [{ text: testo }] });
+const gChat = (extra, schema) => gemini(null, schema, chat.contents.concat(extra ? [turno("user", extra)] : []), CHAT_ISTRUZIONI);
+
+function bollaGemini(r) {
+  const el = document.createElement("div"); el.className = "es";
+  riga(el, { de: r.de, it: r.it, pr: "" }, esc(r.ch));
+  $("chat-log").appendChild(el);
+  if (r.correzione) { const c = document.createElement("div"); c.className = "box attenzione"; c.textContent = r.correzione; $("chat-log").appendChild(c); }
+  chat.suggerimento = r.suggerimento || "";
+}
+function bollaTu(testo) {
+  const el = document.createElement("div"); el.className = "msg-tu"; el.textContent = testo; $("chat-log").appendChild(el);
+}
+function vaiFondoChat() { $("chat-log").lastElementChild?.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
+
+$("chat-via").addEventListener("click", async () => {
+  const tema = [...spuntate("r-ambiti"), $("r-tema").value.trim()].filter(Boolean).join("; ");
+  const verbi = [...spuntate("r-verbi-gruppi"), $("r-verbi").value.trim()].filter(Boolean).join(", ");
+  const forme = [...spuntate("r-forme"), $("r-forme-libere").value.trim()].filter(Boolean);
+  const note = $("r-note").value.trim();
+  const avvio = [
+    `Iniziamo una conversazione dal vivo.`,
+    tema && `Tema lessicale: ${tema}.`,
+    verbi && `Verbi da far usare (in varie persone): ${verbi}.`,
+    forme.length && `Forme grammaticali da allenare: ${forme.join("; ")}.`,
+    note ? `Ruolo e situazione: ${note}` : `Scegli tu una situazione realistica a Zurigo sul tema e un ruolo (tu) per te; lo studente è un cliente o un passante e usa il Si (Lei) con gli sconosciuti.`,
+    `Comincia tu con la prima battuta e presentati brevemente nel ruolo.`,
+  ].filter(Boolean).join("\n");
+  chat = { contents: [turno("user", avvio)], suggerimento: "" };
+  $("chat").hidden = false; $("chat-log").innerHTML = ""; $("chat-stato").textContent = "Gemini apre la scena…";
+  $("chat-via").disabled = true;
+  try {
+    const r = await gChat(null, CHAT_SCHEMA);
+    chat.contents.push(turno("model", JSON.stringify(r)));
+    bollaGemini(r); $("chat-stato").textContent = "";
+    $("chat").scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (e) { $("chat-stato").textContent = "Non ci sono riuscito: " + e.message; chat = null; }
+  $("chat-via").disabled = false;
+});
+
+async function chatInvia() {
+  const testo = $("chat-input").value.trim();
+  if (!chat || !testo) return;
+  $("chat-input").value = ""; bollaTu(testo); chat.contents.push(turno("user", testo));
+  $("chat-invia").disabled = true; $("chat-stato").textContent = "…";
+  try {
+    const r = await gChat(null, CHAT_SCHEMA);
+    chat.contents.push(turno("model", JSON.stringify(r)));
+    bollaGemini(r); $("chat-stato").textContent = "";
+  } catch (e) {
+    chat.contents.pop(); $("chat-log").lastElementChild?.remove();
+    $("chat-input").value = testo; $("chat-stato").textContent = "Non ci sono riuscito: " + e.message;
+  }
+  $("chat-invia").disabled = false; vaiFondoChat(); $("chat-input").focus();
+}
+$("chat-invia").addEventListener("click", chatInvia);
+$("chat-input").addEventListener("keydown", ev => { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); chatInvia(); } });
+
+async function chatAiuto(domanda, titolo) {
+  if (!chat) return;
+  $("chat-stato").textContent = "…";
+  try {
+    const t = await gChat(domanda, null);
+    const c = document.createElement("div"); c.className = "box regola";
+    c.innerHTML = `<div class="etichetta">${esc(titolo)}</div>` + esc(t).replace(/\n/g, "<br>");
+    $("chat-log").appendChild(c); $("chat-stato").textContent = ""; vaiFondoChat();
+  } catch (e) { $("chat-stato").textContent = "Non ci sono riuscito: " + e.message; }
+}
+$("chat-suggerisci").addEventListener("click", () => chatAiuto(
+  "FUORI DAL RUOLO, in italiano: suggeriscimi in 2 modi diversi che cosa potrei rispondere all'ultima battuta, ognuno in zurighese Dieth con traduzione italiana. Non scrivere altro.", "Suggerimento"));
+$("chat-fine").addEventListener("click", () => chatAiuto(
+  "FUORI DAL RUOLO, in italiano: la conversazione finisce qui. Fai un breve riepilogo: 1) gli errori ricorrenti dello studente con la forma giusta, 2) le espressioni utili apparse, 3) un consiglio su che cosa ripassare. Massimo 10 righe.", "Riepilogo"));
+
 // storico
 function storico() { try { return JSON.parse(localStorage.getItem("gemini-schede") || "[]"); } catch (e) { return []; } }
 function memorizza(richiesta, scheda) {
@@ -284,7 +370,7 @@ function mostra(sc) {
         bc.disabled = true; const r = el.querySelector(".risposta-ia"); r.textContent = "…";
         try {
           r.textContent = await gemini(`Lo studente doveva tradurre in zurighese: «${e.it}». Soluzione attesa: «${e.soluzione}». Ha scritto: «${ta.value}». ` +
-            `In 2-3 frasi in italiano: è accettabile? Correggi gli errori (grafia Dieth, forme, ordine) senza ripetere tutta la soluzione se non serve.`);
+            `In 2-3 frasi in italiano: è accettabile? Le varianti di grafia (Hoi Zäme, Pimsleur) sono tollerate: correggi solo errori di forma, lessico o ordine, senza ripetere tutta la soluzione se non serve.`);
         } catch (err) { r.textContent = err.message; }
         bc.disabled = false;
       });
