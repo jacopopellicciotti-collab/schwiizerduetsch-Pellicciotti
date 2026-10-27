@@ -180,6 +180,11 @@ const VERBI = [
   ["häisse", "heißen", "häisse häissisch häisst häissed häissed häissed", "heiße heißt heißt heißen heißt heißen", "ghäisse", "geheißen"],
   ["mache", "machen", "mache machsch macht mached mached mached", "mache machst macht machen macht machen", "gmacht", "gemacht"],
   ["tue", "tun", "tue tuesch tuet tüend tüend tüend", "tue tust tut tun tut tun", "taa", "getan"],
+  ["müese", "müssen", "muess muesch muess müend müend müend", "muss musst muss müssen müsst müssen", "müese", "gemusst"],
+  ["söle", "sollen", "söll söllsch söll söled söled söled", "soll sollst soll sollen sollt sollen", "söle", "gesollt"],
+  ["törfe", "dürfen", "törf törfsch törf törfed törfed törfed", "darf darfst darf dürfen dürft dürfen", "törfe", "gedurft"],
+  ["möge", "mögen", "mag magsch mag möged möged möged", "mag magst mag mögen mögt mögen", "möge", "gemocht"],
+  ["wärde", "werden", "wirde wirsch wird wärded wärded wärded", "werde wirst wird werden werdet werden", "worde", "geworden"],
 ].map(([inf, de, ch, dep, p, pde]) => ({ inf, de, ch: ch.split(" "), dep: dep.split(" "), p, pde }));
 
 const sel = document.getElementById("verbo"), tab = document.getElementById("paradigma");

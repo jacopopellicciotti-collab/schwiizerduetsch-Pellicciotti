@@ -15,6 +15,9 @@ Regole da rispettare sempre:
 - Esercizi "lacuna" e "scelta": il campo frase contiene esattamente un ___ e la soluzione è solo la parte mancante; per "scelta" dai 3 o 4 opzioni, una giusta uguale alla soluzione.
 - Esercizi "traduzione": frase italiana in campo it, soluzione in svizzero. Esercizi "ordine": soluzione è la frase svizzera intera (massimo 9 parole).
 - In accettate metti altre risposte corrette equivalenti, se ce ne sono.
+- parole_nuove: solo parole che non sono nelle carte, nella forma base (sostantivi con articolo, verbi all'infinito); niente coniugazioni.
+- Coniugazioni: usa esattamente queste forme zurighesi (presente ich, du, er/si/es, mir, ir, si; participio). Se usi un verbo che non è qui, coniugalo allo stesso modo (plurale in -ed, 2a persona in -sch):
+${VERBI.map(v => `${v.inf}: ${v.ch.join(", ")}; participio ${v.p}`).join("\n")}
 
 Carte dello studente (svizzero = italiano):
 ${CARTE.map(c => `${c.ch} = ${c.it}`).join("\n")}`;
@@ -168,7 +171,7 @@ $("genera").addEventListener("click", async () => {
     richiesta.verbi && `Verbi su cui insistere (in tutte le persone utili): ${richiesta.verbi}.`,
     richiesta.forme.length && `Forme grammaticali da allenare: ${richiesta.forme.join("; ")}.`,
     tipi.includes("dialogo") ? `Comincia con un dialogo di 8-12 battute sul tema, che usi verbi e forme richieste.` : `Non serve il dialogo (lascialo vuoto).`,
-    `Poi ${richiesta.quanti} esercizi, distribuiti tra questi tipi: ${tipi.filter(t => t !== "dialogo").join(", ") || "lacuna, scelta, traduzione, ordine"}. Se c'è il dialogo, molti esercizi riprendono le sue frasi.`,
+    `Poi esattamente ${richiesta.quanti} esercizi (il campo esercizi non deve mai essere vuoto), distribuiti tra questi tipi: ${tipi.filter(t => t !== "dialogo").join(", ") || "lacuna, scelta, traduzione, ordine"}. Se c'è il dialogo, molti esercizi riprendono le sue frasi.`,
     richiesta.note && `Altre richieste dello studente: ${richiesta.note}`,
   ].filter(Boolean).join("\n");
   $("genera").disabled = true; $("stato").textContent = "Gemini sta preparando gli esercizi…";
@@ -176,6 +179,7 @@ $("genera").addEventListener("click", async () => {
     const scheda = await gemini(testo, SCHEMA);
     memorizza(richiesta, scheda);
     mostra(scheda);
+    vaiAlRisultato();
     $("stato").textContent = "";
   } catch (e) { $("stato").textContent = "Non ci sono riuscito: " + e.message; }
   $("genera").disabled = false;
@@ -193,12 +197,18 @@ function disegnaStorico() {
   s.forEach((v, i) => {
     const d = document.createElement("div"); d.className = "voce-storico";
     d.innerHTML = `<button class="apri">${esc(v.scheda.titolo || "Scheda")} <span class="sotto">· ${esc(v.data)}</span></button><button class="via" title="Elimina">✕</button>`;
-    d.querySelector(".apri").addEventListener("click", () => { mostra(v.scheda); $("risultato").scrollIntoView({ behavior: "smooth" }); });
+    d.querySelector(".apri").addEventListener("click", () => { mostra(v.scheda); vaiAlRisultato(); });
     d.querySelector(".via").addEventListener("click", () => { const t = storico(); t.splice(i, 1); salva("gemini-schede", JSON.stringify(t)); disegnaStorico(); });
     box.appendChild(d);
   });
 }
 disegnaStorico();
+
+// porta la scheda appena aperta sotto la barra delle sezioni
+function vaiAlRisultato() {
+  const nav = document.querySelector("nav").offsetHeight;
+  window.scrollTo({ top: $("risultato").getBoundingClientRect().top + window.scrollY - nav - 8 });
+}
 
 // resa della scheda
 const norm = s => String(s).toLowerCase().replace(/[’`´]/g, "'").replace(/[.,!?;:«»"()]/g, "").replace(/\s+/g, " ").trim();
@@ -218,7 +228,8 @@ function mostra(sc) {
       d.appendChild(el);
     });
   }
-  const punti = box("prova", `<div class="etichetta">Esercizi <span class="punti"></span></div>`);
+  const punti = box("prova", `<div class="etichetta">Esercizi <span class="punti"></span></div>` +
+    (sc.esercizi?.length ? "" : `<p>Questa volta Gemini ha mandato solo il dialogo, senza esercizi: premi di nuovo Genera.</p>`));
   let giuste = 0, fatte = 0;
   const segna = (el, ok) => {
     if (el.classList.contains("fatto")) return;
