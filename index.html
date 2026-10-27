@@ -511,24 +511,41 @@
     <p>Forme grammaticali</p>
     <div class="tendine" id="r-forme"></div>
     <label>Altre forme <input id="r-forme-libere" placeholder="es. imperativo, comparativo"></label>
-    <p>Tipi di esercizio</p>
+    <p>Tipi di esercizio <span class="sotto">(scegli almeno uno)</span></p>
     <div class="spunte" id="r-tipi">
-      <label><input type="checkbox" value="dialogo" checked>dialogo</label>
-      <label><input type="checkbox" value="lacuna" checked>completa</label>
-      <label><input type="checkbox" value="scelta" checked>scelta multipla</label>
-      <label><input type="checkbox" value="traduzione" checked>traduci</label>
-      <label><input type="checkbox" value="ordine" checked>riordina</label>
+      <label><input type="checkbox" value="dialogo">dialogo</label>
+      <label><input type="checkbox" value="lacuna">completa</label>
+      <label><input type="checkbox" value="scelta">scelta multipla</label>
+      <label><input type="checkbox" value="traduzione">traduci</label>
+      <label><input type="checkbox" value="ordine">riordina</label>
     </div>
     <label>Quanti esercizi <select id="r-quanti"><option>6</option><option selected>10</option><option>15</option><option>20</option></select></label>
     <label>Altre richieste <textarea id="r-note" rows="2" placeholder="es. dialogo tra due colleghi, usa il Lei"></textarea></label>
-    <p><button class="pulsante" id="genera">Genera esercizi</button>
-      <button class="pulsante" id="chat-via">Conversa dal vivo</button></p>
-    <div class="sotto">«Conversa dal vivo» usa gli stessi menu (tema, verbi, forme). In «Altre richieste» puoi indicare ruolo e situazione, es. «sei un cameriere, io sono un cliente».</div>
+    <p><button class="pulsante" id="genera">Genera esercizi</button></p>
     <div class="esito" id="stato"></div>
+  </div>
+
+  <div class="box prova modulo">
+    <div class="etichetta">Conversazione dal vivo (roleplay con Gemini)</div>
+    <label>Contesto <span class="sotto">(compare in un riquadro prima del dialogo)</span>
+      <textarea id="c-contesto" rows="2" placeholder="es. Sei a Zurigo, al bar della stazione, la mattina presto: ordini la colazione"></textarea></label>
+    <label>Regole del roleplay
+      <textarea id="c-regole" rows="2" placeholder="es. Gemini fa il cameriere, io il cliente; usa il Si; battute brevi; correggimi solo i verbi"></textarea></label>
+    <p>Ambiti lessicali</p>
+    <div class="tendine" id="c-ambiti"></div>
+    <label>Altro tema <input id="c-tema" placeholder="scrivi qui un tema che non è nei menu"></label>
+    <p>Verbi</p>
+    <div class="tendine" id="c-verbi-gruppi"></div>
+    <label>Altri verbi <input id="c-verbi" placeholder="es. bringe, warte"></label>
+    <p>Forme grammaticali</p>
+    <div class="tendine" id="c-forme"></div>
+    <label>Altre forme <input id="c-forme-libere" placeholder="es. imperativo, comparativo"></label>
+    <p><button class="pulsante" id="chat-via">Inizia la conversazione</button></p>
   </div>
 
   <div class="box confronto" id="chat" hidden>
     <div class="etichetta">Conversazione dal vivo · tocca una battuta per Hochdeutsch e italiano</div>
+    <div id="chat-contesto"></div>
     <div id="chat-log"></div>
     <p><textarea id="chat-input" rows="2" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Rispondi in zurighese (se non sai, scrivi in italiano). Invio per mandare"></textarea></p>
     <p><button class="pulsante" id="chat-invia">Invia</button>

@@ -158,10 +158,12 @@ function tendine(id, gruppi) {
   });
 }
 tendine("r-ambiti", AMBITI); tendine("r-verbi-gruppi", VERBI_GRUPPI); tendine("r-forme", FORME_GRUPPI);
+tendine("c-ambiti", AMBITI); tendine("c-verbi-gruppi", VERBI_GRUPPI); tendine("c-forme", FORME_GRUPPI);
 
 const spuntate = id => [...document.querySelectorAll(`#${id} input:checked`)].map(i => i.value);
 $("genera").addEventListener("click", async () => {
   const tipi = spuntate("r-tipi");
+  if (!tipi.length) { $("stato").textContent = "Scegli almeno un tipo di esercizio."; return; }
   const richiesta = {
     tema: [...spuntate("r-ambiti"), $("r-tema").value.trim()].filter(Boolean).join("; "),
     verbi: [...spuntate("r-verbi-gruppi"), $("r-verbi").value.trim()].filter(Boolean).join(", "),
@@ -214,20 +216,27 @@ function bollaTu(testo) {
 function vaiFondoChat() { $("chat-log").lastElementChild?.scrollIntoView({ block: "nearest", behavior: "smooth" }); }
 
 $("chat-via").addEventListener("click", async () => {
-  const tema = [...spuntate("r-ambiti"), $("r-tema").value.trim()].filter(Boolean).join("; ");
-  const verbi = [...spuntate("r-verbi-gruppi"), $("r-verbi").value.trim()].filter(Boolean).join(", ");
-  const forme = [...spuntate("r-forme"), $("r-forme-libere").value.trim()].filter(Boolean);
-  const note = $("r-note").value.trim();
+  const tema = [...spuntate("c-ambiti"), $("c-tema").value.trim()].filter(Boolean).join("; ");
+  const verbi = [...spuntate("c-verbi-gruppi"), $("c-verbi").value.trim()].filter(Boolean).join(", ");
+  const forme = [...spuntate("c-forme"), $("c-forme-libere").value.trim()].filter(Boolean);
+  const contesto = $("c-contesto").value.trim(), regole = $("c-regole").value.trim();
   const avvio = [
     `Iniziamo una conversazione dal vivo.`,
+    contesto && `Contesto della scena (scritto dallo studente): ${contesto}`,
+    regole && `Regole del roleplay da rispettare per tutta la conversazione: ${regole}`,
     tema && `Tema lessicale: ${tema}.`,
     verbi && `Verbi da far usare (in varie persone): ${verbi}.`,
     forme.length && `Forme grammaticali da allenare: ${forme.join("; ")}.`,
-    note ? `Ruolo e situazione: ${note}` : `Scegli tu una situazione realistica a Zurigo sul tema e un ruolo (tu) per te; lo studente è un cliente o un passante e usa il Si (Lei) con gli sconosciuti.`,
+    !contesto && !regole && `Scegli tu una situazione realistica a Zurigo sul tema e un ruolo per te; lo studente usa il Si (Lei) con gli sconosciuti.`,
     `Comincia tu con la prima battuta e presentati brevemente nel ruolo.`,
   ].filter(Boolean).join("\n");
   chat = { contents: [turno("user", avvio)], suggerimento: "" };
-  $("chat").hidden = false; $("chat-log").innerHTML = ""; $("chat-stato").textContent = "Gemini apre la scena…";
+  $("chat").hidden = false; $("chat-log").innerHTML = "";
+  const righe = t => esc(t).split("\n").join("<br>");
+  $("chat-contesto").innerHTML = contesto || regole ? `<div class="box regola">` +
+    (contesto ? `<div class="etichetta">Contesto</div>${righe(contesto)}` : "") +
+    (regole ? `<div class="etichetta" style="margin-top:8px">Regole</div>${righe(regole)}` : "") + `</div>` : "";
+  $("chat-stato").textContent = "Gemini apre la scena…";
   $("chat-via").disabled = true;
   try {
     const r = await gChat(null, CHAT_SCHEMA);
