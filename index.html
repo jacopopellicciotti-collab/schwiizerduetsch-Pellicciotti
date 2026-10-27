@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grammatica zurighese</title>
+<link rel="stylesheet" href="stile.css">
+</head>
+<body>
+<header>
+  <h1><span class="ch">Schwiizerdütsch</span> · grammatica dello zurighese</h1>
+  <p class="sotto">Con le frasi delle tue carte, sempre a confronto con lo <span class="de">Hochdeutsch</span>. Grafia Dieth. Tocca un esempio per vedere pronuncia e italiano.</p>
+  <div class="comandi">
+    <button id="t-de" aria-pressed="true">Hochdeutsch</button>
+    <button id="t-pr" aria-pressed="false">Pronuncia</button>
+    <button id="t-it" aria-pressed="false">Italiano</button>
+    <span class="legenda">
+      <span class="regola">regola</span><span class="attenzione">attenzione</span><span class="confronto">confronto</span><span class="prova">prova tu</span>
+    </span>
+  </div>
+</header>
+
+<nav>
+  <button data-sez="fonologia">Fonologia</button>
+  <button data-sez="nomi">Nomi e pronomi</button>
+  <button data-sez="verbi">Verbi</button>
+  <button data-sez="sintassi">Sintassi</button>
+  <button data-sez="su-misura">Su misura</button>
+</nav>
+
+<main>
+
+<!-- ============================ FONOLOGIA ============================ -->
+<section id="fonologia">
+  <h2>Fonologia</h2>
+
+  <div class="box regola">
+    <h3>Come si legge la grafia Dieth</h3>
+    <ul>
+      <li>Vocale doppia = vocale lunga: <span class="ch">Wii</span>, <span class="ch">Jaar</span>, <span class="ch">Aabig</span>, <span class="ch">seer</span>. Vocale semplice = breve, anche in sillaba aperta: <span class="ch">Name</span> <span class="ipa">[ˈnɑmə]</span>.</li>
+      <li><span class="ch">ie, ue, üe</span> sono dittonghi veri, si sentono tutte e due le vocali: <span class="ch">guet</span> <span class="ipa">[ɡ̊uət]</span>.</li>
+      <li><span class="ch">ä</span> è una e molto aperta <span class="ipa">[æ]</span>; <span class="ch">e</span> in fine di parola è la vocale neutra <span class="ipa">[ə]</span>.</li>
+      <li><span class="ch">ch</span> si legge sempre <span class="ipa">[x]</span>, come in <i>Bach</i>. Consonante doppia = consonante lunga: <span class="ch">bitte</span> <span class="ipa">[ˈb̥ɪtːə]</span>.</li>
+      <li><span class="ch">st, sp</span> si leggono <span class="ipa">[ʃt, ʃp]</span> anche dentro la parola; a inizio radice si scrivono st/sp (<span class="ch">verstaa, spöter</span>), altrove scht/schp (<span class="ch">Röschti</span>).</li>
+    </ul>
+  </div>
+
+  <h2>Vocali</h2>
+  <div class="box regola">
+    <h3>Niente dittongazione: ii, uu, üü al posto di ei, au, eu</h3>
+    <p>Lo svizzero ha conservato le vocali lunghe del medio alto tedesco, che lo Hochdeutsch ha trasformato in dittonghi.</p>
+  </div>
+  <div class="es">Es Glas <b>Wii</b>, Herr Taylor?</div>
+  <div class="es" data-hl="Schweiz">Woned Si i de <b>Schwiiz</b>?</div>
+  <div class="es" data-hl="Freizeit">Was machsch i dinere <b>Fräiziit</b>?</div>
+  <div class="es" data-hl="aus">Ich chume <b>us</b>…</div>
+  <div class="es" data-hl="Schweizerdeutsch">Ich verstaa e chli <b>Schwiizerdütsch</b>.</div>
+
+  <div class="box regola">
+    <h3>I dittonghi antichi restano: ie, ue, üe</h3>
+    <p>Dove lo Hochdeutsch ha una vocale lunga semplice (<span class="de">gut</span> <span class="ipa">[ɡuːt]</span>), lo svizzero ha ancora il dittongo (<span class="ch">guet</span> <span class="ipa">[ɡ̊uət]</span>). Anche <span class="ch">wie</span> e <span class="ch">Bier</span> si dicono <span class="ipa">[ʋiə], [b̥iər]</span>.</p>
+  </div>
+  <div class="es" data-hl="gut">Ich verstaa nöd <b>guet</b> Schwiizerdütsch.</div>
+  <div class="es" data-hl="tut">(Es) <b>tuet</b> mir läid.</div>
+  <div class="es" data-hl="Guten">Guete Morge, Herr/Frau…</div>
+  <div class="es">Grüezi mitenand.</div>
+
+  <div class="box attenzione">
+    <h3>Lo stesso «ei» tedesco diventa ii oppure äi</h3>
+    <p>Lo Hochdeutsch ha unito due suoni antichi in un solo <span class="de">ei</span>; lo svizzero li tiene distinti. Si vede in una parola sola: <span class="de">Freizeit</span> → <span class="ch">Fräiziit</span> (<i>frei</i> antico → äi, <i>Zeit</i> antico → ii).</p>
+    <p>Allo stesso modo: <span class="de">zwei, nein, heißen, weiß, kein, leider</span> → <span class="ch">zwäi, näi, häisse, wäiss, käi, läider</span>; ma <span class="de">Wein, Schweiz, Weißwein</span> → <span class="ch">Wii, Schwiiz, Wiiswii</span>.</p>
+  </div>
+  <div class="es" data-hl="leider">Näi, <b>läider</b> nöd.</div>
+  <div class="es" data-hl="Weißwein">Zwäi Glas <b>Wiiswii</b>?</div>
+
+  <div class="box regola">
+    <h3>ä aperta dove lo Hochdeutsch ha e</h3>
+    <p>La e breve antica è diventata <span class="ch">ä</span> <span class="ipa">[æ]</span>: <span class="ch">Wätter, rächts, schlächt, gärn, Bärn, ässe, Änglisch, schnäll</span>. A volte anche la a: <span class="de">wann, dann</span> → <span class="ch">wänn, dänn</span>.</p>
+  </div>
+  <div class="es" data-hl="Wetter|schlecht">S <b>Wätter</b> isch <b>schlächt</b>.</div>
+  <div class="es" data-hl="rechts|dann">Rächts, <b>dänn</b> links.</div>
+
+  <div class="box regola">
+    <h3>Vocali brevi in sillaba aperta</h3>
+    <p>Lo Hochdeutsch allunga la vocale in sillaba aperta, lo zurighese spesso no: <span class="de">Name</span> <span class="ipa">[ˈnaːmə]</span> ma <span class="ch">Name</span> <span class="ipa">[ˈnɑmə]</span>; <span class="de">sagen</span> <span class="ipa">[ˈzaːɡn̩]</span> ma <span class="ch">säge</span> <span class="ipa">[ˈsæɡ̊ə]</span>; <span class="de">reden</span> ma <span class="ch">rede</span> <span class="ipa">[ˈred̥ə]</span>.</p>
+  </div>
+  <div class="es">Min Name isch Taylor.</div>
+
+  <h2>Consonanti</h2>
+  <div class="box regola">
+    <h3>k iniziale → ch <span class="ipa">[x]</span></h3>
+    <p>È il tratto più riconoscibile: <span class="ch">cha, chume, chli, Charte, Chätzli, chönd</span>. Fanno eccezione i prestiti e le parole dove la k viene da un nesso antico: <span class="ch">Kafi</span> <span class="ipa">[ˈkʰɑfi]</span>, <span class="ch">käi</span> <span class="ipa">[kʰæi]</span>.</p>
+  </div>
+  <div class="es" data-hl="Küchenschränkchen">S <b>Ch</b>u<b>ch</b>i<b>ch</b>äschtli isch voll mit Gschiir.</div>
+  <div class="es" data-hl="kommen">Vo wo <b>ch</b>ömed Si?</div>
+  <div class="es" data-hl="Karte">D'<b>Ch</b>arte, bitte.</div>
+
+  <div class="box regola">
+    <h3>Un solo ch: niente <span class="ipa">[ç]</span></h3>
+    <p>Lo Hochdeutsch ha due suoni (<span class="de">ich</span> <span class="ipa">[ɪç]</span>, <span class="de">Bach</span> <span class="ipa">[bax]</span>); lo svizzero dice sempre <span class="ipa">[x]</span>: <span class="ch">ich</span> <span class="ipa">[ɪx]</span>, <span class="ch">mich, dich, rächt, Ussicht</span>.</p>
+  </div>
+  <div class="es">Sorry, ich verstaa dich nöd.</div>
+
+  <div class="box regola">
+    <h3>Lenis e fortis al posto di sonore e sorde</h3>
+    <p>In svizzero b, d, g non sono sonore: sono deboli e sorde <span class="ipa">[b̥ d̥ ɡ̊]</span>. p, t, k (e f, s, sch, ch doppie) sono forti e lunghe, ma senza aspirazione. La differenza è di forza e durata, non di voce: <span class="ch">bitte</span> <span class="ipa">[ˈb̥ɪtːə]</span>, <span class="ch">danke</span> <span class="ipa">[ˈd̥ɑŋkə]</span>.</p>
+    <p>Per lo stesso motivo non c'è l'indurimento finale dello Hochdeutsch: <span class="de">Tag</span> <span class="ipa">[taːk]</span> ma <span class="ch">Tag</span> <span class="ipa">[tɑːɡ̊]</span>. E la s è sempre sorda: <span class="ch">Si, säge, Suppe</span> con <span class="ipa">[s]</span>, non <span class="ipa">[z]</span>.</p>
+  </div>
+  <div class="es">Guete Tag.</div>
+  <div class="es">Ich wett gärn öppis ässe.</div>
+
+  <div class="box regola">
+    <h3>st, sp → scht, schp ovunque; -st finale → -sch</h3>
+    <p>Lo Hochdeutsch dice <span class="ipa">[ʃt]</span> solo a inizio radice (<span class="de">verstehen</span>), lo svizzero anche dentro e in fondo alla parola: <span class="ch">Röschti, Chäschtli</span>, e soprattutto <span class="ch">isch, bisch</span> per <span class="de">ist, bist</span>.</p>
+  </div>
+  <div class="es" data-hl="Rösti">Gschnätzlets mit <b>Röschti</b>.</div>
+  <div class="es" data-hl="bist">Du <b>bisch</b> seer nätt.</div>
+
+  <div class="box regola">
+    <h3>Cadono la -n e la -e finali</h3>
+    <p>La -n finale delle sillabe atone cade: <span class="ch">ässe, trinke, Morge, Franke, Guete</span>. Ricompare davanti a vocale per evitare lo iato: <span class="ch">Guete-n-Aabig</span>. Spesso cade anche la -e finale: <span class="de">Straße, Gasse, Jahre, ich habe</span> → <span class="ch">Strass, Gass, Jaar, ich ha</span>.</p>
+  </div>
+  <div class="es" data-hl="Guten">Guete-n-Aabig.</div>
+  <div class="es" data-hl="Bahnhofstraße">D'<b>Bahnhofstrass</b> isch rächts.</div>
+  <div class="es" data-hl="Gute">Guet Nacht.</div>
+
+  <div class="box regola">
+    <h3>Il prefisso ge- si riduce a g-</h3>
+    <p>Nei participi e in molti nomi: <span class="ch">gsi, gsäit, gschee, gfallt, Gschiir, Gschnätzlets</span>.</p>
+  </div>
+  <div class="es" data-hl="gesagt">Was häsch <b>gsäit</b>?</div>
+  <div class="es" data-hl="geschehen">Bitte, gärn <b>gschee</b>.</div>
+
+  <div class="box regola">
+    <h3>Prestiti francesi: accento sulla prima sillaba</h3>
+    <p>Lo svizzero prende molte parole dal francese e le accentua all'inizio. Il libro mette la pronuncia tra parentesi.</p>
+  </div>
+  <div class="es">s Velo (Welo)</div>
+  <div class="es">de Coiffeur (Guafför)</div>
+  <div class="es">s Poulet (Pule)</div>
+  <div class="es">s Lavabo (Lawabo)</div>
+
+  <div class="box confronto">
+    <div class="etichetta">Confronto sistematico</div>
+    <h3><span class="de">Hochdeutsch</span> → <span class="ch">Schwiizerdütsch</span></h3>
+    <div class="tab"><table>
+      <tr><th>Hochdeutsch</th><th>Schwiizerdütsch</th><th>Esempi</th></tr>
+      <tr><td class="de">ei (antico î)</td><td class="ch">ii</td><td><i class="p">Wein|Wii</i> <i class="p">Schweiz|Schwiiz</i> <i class="p">Zeit|Ziit</i></td></tr>
+      <tr><td class="de">ei (antico ei)</td><td class="ch">äi</td><td><i class="p">zwei|zwäi</i> <i class="p">nein|näi</i> <i class="p">heißen|häisse</i></td></tr>
+      <tr><td class="de">au</td><td class="ch">u, uu</td><td><i class="p">aus|us</i> <i class="p">auf|uf</i> <i class="p">Aussicht|Ussicht</i></td></tr>
+      <tr><td class="de">eu (antico iu)</td><td class="ch">ü, üü</td><td><i class="p">deutsch|dütsch</i></td></tr>
+      <tr><td class="de">eu (antico öu)</td><td class="ch">öi</td><td><i class="p">freut|fröit</i></td></tr>
+      <tr><td class="de">ie [iː], u [uː], ü [yː]</td><td class="ch">ie, ue, üe</td><td><i class="p">gut|guet</i> <i class="p">tut|tuet</i> <i class="p">grüßen|grüeze</i></td></tr>
+      <tr><td class="de">e breve</td><td class="ch">ä [æ]</td><td><i class="p">Wetter|Wätter</i> <i class="p">gern|gärn</i> <i class="p">essen|ässe</i></td></tr>
+      <tr><td class="de">vocale lunga in sillaba aperta</td><td class="ch">spesso breve</td><td><i class="p">Name|Name</i> <i class="p">sagen|säge</i></td></tr>
+      <tr><td class="de">k-</td><td class="ch">ch- [x]</td><td><i class="p">kann|cha</i> <i class="p">klein|chli</i> <i class="p">Küche|Chuchi</i></td></tr>
+      <tr><td class="de">ch [ç] / [x]</td><td class="ch">ch sempre [x]</td><td><i class="p">ich|ich</i> <i class="p">recht|rächt</i></td></tr>
+      <tr><td class="de">b d g sonore, p t k aspirate</td><td class="ch">b̥ d̥ ɡ̊ lenis, p t k fortis</td><td><i class="p">danke|danke</i> <i class="p">Tag|Tag</i></td></tr>
+      <tr><td class="de">s- [z]</td><td class="ch">s [s]</td><td><i class="p">Sie|Si</i> <i class="p">sagen|säge</i></td></tr>
+      <tr><td class="de">st, sp interni; -st</td><td class="ch">scht, schp; -sch</td><td><i class="p">ist|isch</i> <i class="p">Rösti|Röschti</i></td></tr>
+      <tr><td class="de">-en atono</td><td class="ch">-e</td><td><i class="p">trinken|trinke</i> <i class="p">Morgen|Morge</i></td></tr>
+      <tr><td class="de">-e finale</td><td class="ch">cade spesso</td><td><i class="p">Straße|Strass</i> <i class="p">Jahre|Jaar</i></td></tr>
+      <tr><td class="de">ge-</td><td class="ch">g-</td><td><i class="p">gesagt|gsäit</i> <i class="p">gewesen|gsi</i></td></tr>
+      <tr><td class="de">-ung, -ik</td><td class="ch">-ig</td><td><i class="p">Lösung|Lösig</i> <i class="p">Musik|Musig</i></td></tr>
+    </table></div>
+  </div>
+
+  <div class="box prova" id="quiz-fono">
+    <div class="etichetta">Prova tu <span class="punti"></span></div>
+    <h3>Applica le regole: come si dice in svizzero?</h3>
+    <div class="domanda de"></div>
+    <div class="scelte"></div>
+    <div class="esito"></div>
+  </div>
+</section>
+
+<!-- ============================ NOMI E PRONOMI ============================ -->
+<section id="nomi">
+  <h2>Morfologia nominale</h2>
+
+  <div class="box regola">
+    <h3>Articoli: de, d', s</h3>
+    <p>Sono brevi e senza accento: maschile <span class="ch">de</span>, femminile <span class="ch">d'</span>, neutro <span class="ch">s</span>; al plurale <span class="ch">d'</span> per tutti i generi. Gli indeterminativi sono <span class="ch">en</span> (m), <span class="ch">e</span> (f), <span class="ch">es</span> (n).</p>
+  </div>
+  <div class="es">d' / de / s</div>
+  <div class="es" data-hl="Der">De Wii isch guet, nöd wahr?</div>
+  <div class="es" data-hl="Die">D'Schwiiz isch wunderbar!</div>
+  <div class="es" data-hl="Das">S Wätter isch nöd guet.</div>
+  <div class="es" data-hl="einen">Ich wett gärn <b>en</b> Kafi trinke.</div>
+  <div class="es" data-hl="eine">Das isch <b>e</b> gäbigi Lösig für s Problem.</div>
+  <div class="es" data-hl="Ein">Es Bier, bitte.</div>
+
+  <div class="box attenzione">
+    <h3>Il nome proprio vuole l'articolo</h3>
+    <p>Davanti a persone (anche con Herr e Frau) lo svizzero mette l'articolo, lo Hochdeutsch standard no.</p>
+  </div>
+  <div class="es">Isch de Herr Lüdin da?</div>
+  <div class="es">D'Frau Meyer isch nöd da.</div>
+
+  <div class="box regola">
+    <h3>Tre casi, non quattro</h3>
+    <p>Il genitivo non si usa (si dice <span class="ch">vo</span> + dativo). E nominativo e accusativo sono uguali in tutto, articoli compresi: <span class="ch">en Kafi</span> vale per <span class="de">ein</span> e per <span class="de">einen Kaffee</span>. Resta il dativo.</p>
+  </div>
+  <div class="es" data-hl="einen">Wetted Si gärn <b>en</b> Kafi trinke?</div>
+  <div class="es extra" data-de="Ich trinke den Wein." data-it="Bevo il vino." data-pr="ɪx ˈtrɪŋkə d̥ə ʋiː" data-hl="den">Ich trinke <b>de</b> Wii.</div>
+  <div class="es extra" data-de="Das Fahrrad von Frau Meyer (Frau Meyers Fahrrad)." data-it="La bicicletta della signora Meyer." data-pr="s ˈʋelo fɔ d̥ə frɑu ˈmæiər" data-hl="von">S Velo <b>vo de</b> Frau Meyer.</div>
+
+  <div class="tab"><table>
+    <tr><th></th><th>maschile</th><th>femminile</th><th>neutro</th><th>plurale</th></tr>
+    <tr><th>nom./acc.</th><td class="ch">de · en</td><td class="ch">d' · e</td><td class="ch">s · es</td><td class="ch">d'</td></tr>
+    <tr><th>dativo</th><td class="ch">em · emene</td><td class="ch">de · ere</td><td class="ch">em · emene</td><td class="ch">de</td></tr>
+    <tr><th>Hochdeutsch nom.</th><td class="de">der · ein</td><td class="de">die · eine</td><td class="de">das · ein</td><td class="de">die</td></tr>
+    <tr><th>Hochdeutsch acc.</th><td class="de">den · einen</td><td class="de">die · eine</td><td class="de">das · ein</td><td class="de">die</td></tr>
+    <tr><th>Hochdeutsch dat.</th><td class="de">dem · einem</td><td class="de">der · einer</td><td class="de">dem · einem</td><td class="de">den</td></tr>
+  </table></div>
+  <div class="es" data-hl="in der">Ich schaffe <b>i de</b> Schwiiz.</div>
+  <div class="es" data-hl="vom">Mir händ e gäbigi Ussicht <b>vom</b> Balkon us.</div>
+  <div class="es" data-hl="zur">Wo dure gat's <b>zur</b> Märtgass?</div>
+
+  <div class="box regola">
+    <h3>Diminutivo in -li</h3>
+    <p>Al posto di <span class="de">-chen / -lein</span>. Il diminutivo è sempre neutro e mette l'Umlaut: <i class="p">Katze|Chatz</i> → <span class="ch">s Chätzli</span>, <i class="p">Schatz|Schatz</i> → <span class="ch">s Schätzli</span>, <i class="p">Brot|Brot</i> → <span class="ch">s Brötli</span>. In svizzero è molto più frequente che in tedesco e spesso non vuol dire «piccolo»: <span class="ch">s Gipfeli</span> è semplicemente il cornetto.</p>
+  </div>
+  <div class="es">s Chätzli</div>
+  <div class="es">s Brötli</div>
+  <div class="es">s Gipfeli</div>
+  <div class="es">s Chuchichäschtli</div>
+
+  <div class="box regola">
+    <h3>Aggettivi</h3>
+    <p>Da predicato restano invariati, come in tedesco: <span class="ch">S isch guet</span>. Davanti al nome con l'indeterminativo: maschile <span class="ch">-e</span>, femminile <span class="ch">-i</span>, neutro <span class="ch">-s</span>. Le desinenze sono più corte di quelle tedesche e non cambiano tra nominativo e accusativo.</p>
+  </div>
+  <div class="es" data-hl="schönen">No en <b>schöne</b> Tag! / No en <b>schöne</b> Aabig!</div>
+  <div class="es" data-hl="bequeme">Mir händ e <b>gäbigi</b> Ussicht vom Balkon us.</div>
+  <div class="es" data-hl="Geschnetzeltes">Gschnätzlet<b>s</b> mit Röschti.</div>
+
+  <h2>Pronomi</h2>
+  <div class="box regola">
+    <h3>Pronomi personali</h3>
+    <p>Ogni pronome ha una forma piena e una forma atona, che si appoggia al verbo: <span class="ch">ich → i</span>, <span class="ch">du → de</span> o niente, <span class="ch">mir → mer</span>, <span class="ch">es → s</span>.</p>
+  </div>
+  <div class="tab"><table>
+    <tr><th></th><th>nominativo</th><th>accusativo</th><th>dativo</th><th>Hochdeutsch</th></tr>
+    <tr><th>1 sg</th><td class="ch">ich (i)</td><td class="ch">mich</td><td class="ch">mir (mer)</td><td class="de">ich · mich · mir</td></tr>
+    <tr><th>2 sg</th><td class="ch">du (de)</td><td class="ch">dich</td><td class="ch">dir (der)</td><td class="de">du · dich · dir</td></tr>
+    <tr><th>3 m</th><td class="ch">er</td><td class="ch">in (en)</td><td class="ch">im (em)</td><td class="de">er · ihn · ihm</td></tr>
+    <tr><th>3 f</th><td class="ch">si (s)</td><td class="ch">si (s)</td><td class="ch">ire (ere)</td><td class="de">sie · sie · ihr</td></tr>
+    <tr><th>3 n</th><td class="ch">es (s)</td><td class="ch">es (s)</td><td class="ch">im (em)</td><td class="de">es · es · ihm</td></tr>
+    <tr><th>1 pl</th><td class="ch">mir (mer)</td><td class="ch">üs</td><td class="ch">üs</td><td class="de">wir · uns · uns</td></tr>
+    <tr><th>2 pl</th><td class="ch">ir (er)</td><td class="ch">öi</td><td class="ch">öi</td><td class="de">ihr · euch · euch</td></tr>
+    <tr><th>3 pl</th><td class="ch">si (s)</td><td class="ch">si (s)</td><td class="ch">ine (ene)</td><td class="de">sie · sie · ihnen</td></tr>
+    <tr><th>cortesia</th><td class="ch">Si</td><td class="ch">Si</td><td class="ch">Ine</td><td class="de">Sie · Sie · Ihnen</td></tr>
+  </table></div>
+  <div class="box attenzione">
+    <h3>mir = «wir» e anche «mir»</h3>
+    <p><span class="ch">Mir händ</span> vuol dire <span class="de">wir haben</span>, ma <span class="ch">S gfallt mir</span> è <span class="de">es gefällt mir</span>. E <span class="ch">mer</span> atono vale sia <span class="de">wir</span> sia <span class="de">man</span>.</p>
+  </div>
+  <div class="es" data-hl="Wir">Mir händ e gäbigi Ussicht vom Balkon us.</div>
+  <div class="es" data-hl="mir">S gfallt mir i de Schwiiz.</div>
+  <div class="es" data-hl="Man">Mer gseet sich!</div>
+  <div class="es" data-hl="Ihnen">Wie gat's Ine?</div>
+
+  <div class="box regola">
+    <h3>Possessivi</h3>
+    <p><span class="ch">min, din, sin, ire, sin · üse, öie, ire · Ire</span> (cortesia). Maschile <span class="ch">min</span>, femminile e plurale <span class="ch">mini</span>, neutro <span class="ch">mis</span>; al dativo femminile <span class="ch">minere, dinere, Irere</span>.</p>
+  </div>
+  <div class="es" data-hl="Mein">Min Name isch nöd Jones.</div>
+  <div class="es" data-hl="deine">Was isch <b>dini</b> Lieblingsmusig?</div>
+  <div class="es" data-hl="Ihrer">Was mached Si i <b>Irere</b> Fräiziit?</div>
+
+  <div class="box regola">
+    <h3>Interrogativi</h3>
+    <p><span class="ch">wär, wäm, was, wo, wänn, wie, warum</span>. Al posto degli avverbi composti tedeschi (<span class="de">woher, wohin, wofür</span>) si usano preposizione + interrogativo.</p>
+  </div>
+  <div class="es">Vo wo?</div>
+  <div class="es">Wohi? / Woane?</div>
+  <div class="es">Für was?</div>
+  <div class="es">Mit wäm?</div>
+
+  <div class="box regola">
+    <h3>Numeri e ore</h3>
+    <p><span class="ch">eis, zwäi, drüü, vier, föif, sächs, sibe, acht, nüün, zä</span>. Per l'ora si usa <span class="ch">am</span> (<span class="de">um</span>), e dalle 4 in su il numero prende <span class="ch">-i</span>: <span class="ch">am vieri, am zäni</span>. <span class="ch">halbi zwäi</span> è l'una e mezza, come <span class="de">halb zwei</span>.</p>
+  </div>
+  <div class="es" data-hl="Um">Am zäni.</div>
+  <div class="es" data-hl="um halb">Am halbi zwäi, bitte.</div>
+  <div class="es">Zä Franke füfzg, bitte.</div>
+
+  <div class="box confronto">
+    <div class="etichetta">Confronto sistematico</div>
+    <h3><span class="de">Hochdeutsch</span> → <span class="ch">Schwiizerdütsch</span></h3>
+    <div class="tab"><table>
+      <tr><th>Hochdeutsch</th><th>Schwiizerdütsch</th><th>Esempi</th></tr>
+      <tr><td class="de">4 casi</td><td class="ch">3: nominativo = accusativo, niente genitivo</td><td><i class="p">einen Kaffee|en Kafi</i> <i class="p">Frau Meyers|vo de Frau Meyer</i></td></tr>
+      <tr><td class="de">der, die, das</td><td class="ch">de, d', s</td><td><i class="p">die Schweiz|d'Schwiiz</i></td></tr>
+      <tr><td class="de">ein, eine, ein</td><td class="ch">en, e, es</td><td><i class="p">ein Bier|es Bier</i></td></tr>
+      <tr><td class="de">nome proprio senza articolo</td><td class="ch">con articolo</td><td><i class="p">Herr Lüdin|de Herr Lüdin</i></td></tr>
+      <tr><td class="de">-chen, -lein</td><td class="ch">-li</td><td><i class="p">Kätzchen|Chätzli</i> <i class="p">Brötchen|Brötli</i></td></tr>
+      <tr><td class="de">-e/-en, -e, -es (aggettivo)</td><td class="ch">-e, -i, -s</td><td><i class="p">einen schönen Tag|en schöne Tag</i> <i class="p">eine praktische|e gäbigi</i></td></tr>
+      <tr><td class="de">wir · man</td><td class="ch">mir/mer · mer</td><td><i class="p">wir haben|mir händ</i> <i class="p">man sieht sich|mer gseet sich</i></td></tr>
+      <tr><td class="de">woher, wofür</td><td class="ch">vo wo, für was</td><td><i class="p">Woher?|Vo wo?</i></td></tr>
+      <tr><td class="de">um zehn</td><td class="ch">am zäni</td><td><i class="p">um halb zwei|am halbi zwäi</i></td></tr>
+    </table></div>
+  </div>
+
+  <div class="box prova" id="quiz-articoli">
+    <div class="etichetta">Prova tu <span class="punti"></span></div>
+    <h3>Quale articolo? (tutti i nomi vengono dalle tue carte)</h3>
+    <div class="domanda"></div>
+    <div class="scelte"></div>
+    <div class="esito"></div>
+  </div>
+</section>
+
+<!-- ============================ VERBI ============================ -->
+<section id="verbi">
+  <h2>Morfologia verbale</h2>
+
+  <div class="box regola">
+    <h3>Infinito in -e, e alcuni verbi brevissimi</h3>
+    <p>Il -n del tedesco cade: <span class="ch">ässe, trinke, säge, rede, schaffe, wone</span>. Alcuni verbi frequenti hanno un infinito di una sillaba con vocale lunga: <span class="ch">gaa</span> (gehen), <span class="ch">staa</span> (stehen, in <span class="ch">verstaa</span>), <span class="ch">haa</span> (haben), <span class="ch">choo</span> (kommen), <span class="ch">tue</span> (tun), <span class="ch">sii</span> (sein).</p>
+  </div>
+
+  <div class="box regola">
+    <h3>Presente: un solo plurale in -ed</h3>
+    <p>Al singolare le desinenze sono <span class="ch">-e, -sch, -t</span>. Al plurale le tre persone hanno la stessa forma: <span class="ch">mir / ir / si woned</span>. La forma di cortesia <span class="ch">Si</span> prende il plurale, come in tedesco.</p>
+  </div>
+  <div class="es" data-hl="wohne">Ich <b>wone</b> z'Bärn.</div>
+  <div class="es" data-hl="wohnst">Wo <b>wonsch</b>?</div>
+  <div class="es" data-hl="wohnen">Wo <b>woned</b> Si?</div>
+  <div class="es" data-hl="machen">Was <b>mached</b> Si i Irere Fräiziit?</div>
+
+  <div class="box prova coniuga">
+    <div class="etichetta">Coniugatore</div>
+    <p>Scegli un verbo. Con «Mettiti alla prova» le forme svizzere spariscono e le scrivi tu.</p>
+    <p><select id="verbo"></select> <button class="pulsante" id="prova-coniuga">Mettiti alla prova</button> <button class="pulsante" id="controlla" hidden>Controlla</button></p>
+    <div class="tab"><table id="paradigma"></table></div>
+    <div class="esito" id="esito-coniuga"></div>
+  </div>
+
+  <div class="box attenzione">
+    <h3>Pronome attaccato al verbo</h3>
+    <p>Nelle domande il pronome atono si fonde col verbo o sparisce: <span class="ch">häsch</span> (<span class="de">hast du</span>), <span class="ch">chasch</span> (<span class="de">kannst du</span>), <span class="ch">Chönti?</span> (<span class="de">Könnte ich?</span>), <span class="ch">Törfi?</span> (<span class="de">Darf ich?</span>), <span class="ch">Wämmer</span> = <span class="ch">wänd mer</span> (<span class="de">wollen wir</span>).</p>
+  </div>
+  <div class="es" data-hl="hast du">Was <b>häsch</b> gsäit?</div>
+  <div class="es">Chönt ich? / Chönti?</div>
+  <div class="es" data-hl="Wollen wir">Wämmer Duzis mache?</div>
+
+  <div class="box regola">
+    <h3>Passato: solo il perfetto</h3>
+    <p>Lo svizzero non ha il preterito (<span class="de">war, sagte, kam</span>): racconta sempre con <span class="ch">haa</span> o <span class="ch">sii</span> + participio. Anche <span class="de">es war</span> diventa <span class="ch">s isch gsi</span>.</p>
+  </div>
+  <div class="es" data-hl="war">S isch guet <b>gsi</b>.</div>
+  <div class="es" data-hl="haben|gesagt">Was <b>händ</b> Si <b>gsäit</b>?</div>
+  <div class="es extra" data-de="Ich war in Basel." data-it="Sono stato a Basilea." data-pr="ɪx b̥ɪ ˈtsb̥ɑːsəl ɡ̊si" data-hl="war">Ich bi z'Basel <b>gsi</b>.</div>
+
+  <div class="box regola">
+    <h3>Participio con g-</h3>
+    <p><span class="ch">ge-</span> si riduce a <span class="ch">g-</span> (<span class="ch">gsäit, gmacht, gschafft, gwont</span>). Davanti a b, d, g, t, k il prefisso si fonde o sparisce: <span class="ch">pracht</span> (gebracht), <span class="ch">cho</span> (gekommen), <span class="ch">gange</span> (gegangen), <span class="ch">taa</span> (getan).</p>
+  </div>
+
+  <div class="box regola">
+    <h3>Congiuntivo II per la cortesia</h3>
+    <p>Dove lo Hochdeutsch usa spesso <span class="de">würden</span> + infinito, lo svizzero usa il congiuntivo del verbo modale: <span class="ch">wett</span> (möchte), <span class="ch">hätt</span> (hätte), <span class="ch">chönt</span> (könnte), <span class="ch">törft</span> (dürfte).</p>
+  </div>
+  <div class="es" data-hl="möchte">Ich <b>wett</b> gärn en Kafi trinke.</div>
+  <div class="es" data-hl="hätten">Was <b>hätted</b> Si gärn?</div>
+  <div class="es" data-hl="Würden">Chönted Si bitte Schriftdütsch rede?</div>
+
+  <div class="box regola">
+    <h3>gärn: «piacere fare»</h3>
+    <p>Come in tedesco, <span class="ch">gärn</span> accanto al verbo vuol dire che una cosa piace. <span class="ch">Ich ha … gärn</span> è il modo normale per <span class="de">ich mag</span>.</p>
+  </div>
+  <div class="es" data-hl="gern">Schaffed Si <b>gärn</b> z'Basel?</div>
+  <div class="es" data-hl="mag">Ich ha … gärn.</div>
+
+  <div class="box regola">
+    <h3>Forma progressiva e «go» + infinito</h3>
+    <p><span class="ch">am</span> + infinito dice che un'azione è in corso; <span class="ch">go</span> + infinito, dopo i verbi di movimento, dice lo scopo.</p>
+  </div>
+  <div class="es extra" data-de="Ich esse gerade." data-it="Sto mangiando." data-pr="ɪx b̥ɪ ɑm ˈæsːə" data-hl="gerade"><b>Ich bi am Ässe.</b></div>
+  <div class="es extra" data-de="Ich gehe essen." data-it="Vado a mangiare." data-pr="ɪx ɡ̊ɑː ɡ̊ɔ ˈæsːə">Ich gaa <b>go</b> ässe.</div>
+
+  <div class="box confronto">
+    <div class="etichetta">Confronto sistematico</div>
+    <h3><span class="de">Hochdeutsch</span> → <span class="ch">Schwiizerdütsch</span></h3>
+    <div class="tab"><table>
+      <tr><th>Hochdeutsch</th><th>Schwiizerdütsch</th><th>Esempi</th></tr>
+      <tr><td class="de">infinito -en</td><td class="ch">-e; verbi brevi in vocale lunga</td><td><i class="p">trinken|trinke</i> <i class="p">verstehen|verstaa</i></td></tr>
+      <tr><td class="de">plurale -en, -t, -en</td><td class="ch">-ed per tutte e tre</td><td><i class="p">wir wohnen|mir woned</i> <i class="p">ihr wohnt|ir woned</i></td></tr>
+      <tr><td class="de">2 sg -st</td><td class="ch">-sch</td><td><i class="p">du wohnst|du wonsch</i></td></tr>
+      <tr><td class="de">preterito + perfetto</td><td class="ch">solo perfetto</td><td><i class="p">es war|s isch gsi</i></td></tr>
+      <tr><td class="de">ge- + participio</td><td class="ch">g-, oppure nulla</td><td><i class="p">gesagt|gsäit</i> <i class="p">gekommen|cho</i></td></tr>
+      <tr><td class="de">würden + infinito</td><td class="ch">congiuntivo del modale</td><td><i class="p">Würden Sie…|Chönted Si…</i></td></tr>
+      <tr><td class="de">möchte</td><td class="ch">wett</td><td><i class="p">Ich möchte|Ich wett</i></td></tr>
+      <tr><td class="de">ich mag</td><td class="ch">ich ha … gärn</td><td><i class="p">Ich mag…|Ich ha … gärn</i></td></tr>
+      <tr><td class="de">verbo e pronome separati</td><td class="ch">fusi nelle domande</td><td><i class="p">hast du|häsch</i> <i class="p">wollen wir|wämmer</i></td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============================ SINTASSI ============================ -->
+<section id="sintassi">
+  <h2>Sintassi</h2>
+
+  <div class="box regola">
+    <h3>Verbo in seconda posizione, come in tedesco</h3>
+    <p>Nella frase principale il verbo coniugato sta al secondo posto; nelle domande sì/no va al primo, nelle domande con interrogativo al secondo.</p>
+  </div>
+  <div class="es">S Wätter isch nöd guet.</div>
+  <div class="es">Sind Si vo Basel?</div>
+  <div class="es">Wo woned Si?</div>
+
+  <div class="box regola">
+    <h3>La negazione nöd, käi</h3>
+    <p><span class="ch">nöd</span> = <span class="de">nicht</span>, <span class="ch">käi</span> = <span class="de">kein</span>, nelle stesse posizioni del tedesco: <span class="ch">nöd</span> va dopo il complemento oggetto pronominale.</p>
+  </div>
+  <div class="es" data-hl="nicht">Sorry, ich verstaa Si <b>nöd</b>.</div>
+  <div class="es" data-hl="kein">Ich verstaa <b>käi</b> Änglisch.</div>
+  <div class="es" data-hl="nicht wahr">Si sind Schwiizerin, <b>nöd wahr</b>?</div>
+
+  <div class="box attenzione">
+    <h3>Il gruppo verbale nella secondaria</h3>
+    <p>Nella secondaria il verbo va in fondo, come in tedesco. Ma con un modale lo zurighese mette di solito il modale <b>prima</b> dell'infinito, mentre lo Hochdeutsch lo mette dopo: <span class="ch">wott erledige</span>, <span class="de">erledigen will</span>.</p>
+  </div>
+  <div class="es" data-hl="erledigen will">Das isch gäbig, wänn mer schnäll öppis <b>wott erledige</b>.</div>
+  <div class="es" data-hl="gesagt haben">Chönd Si bitte widerhole, was Si <b>gsäit händ</b>?</div>
+
+  <div class="box regola">
+    <h3>Il relativo wo</h3>
+    <p>Per tutte le frasi relative basta <span class="ch">wo</span>, invariabile, al posto di <span class="de">der, die, das</span>.</p>
+  </div>
+  <div class="es extra" data-de="Der Herr, der in Bern wohnt." data-it="Il signore che abita a Berna." data-pr="d̥ə hɛr ʋɔ tsb̥ærn ʋoːnt" data-hl="der">De Herr, <b>wo</b> z'Bärn wont.</div>
+
+  <div class="box regola">
+    <h3>Luoghi e provenienza: z', i, vo</h3>
+    <ul>
+      <li><span class="ch">z'</span> + nome di città = <span class="de">in</span>: <span class="ch">z'Bärn, z'Basel</span>.</li>
+      <li><span class="ch">i</span> (davanti a vocale e nei nomi senza articolo <span class="ch">in</span>) + articolo = <span class="de">in</span>: <span class="ch">i de Schwiiz</span>.</li>
+      <li><span class="ch">vo</span> = <span class="de">aus</span> e <span class="de">von</span>: <span class="ch">Ich bi vo Boston</span>.</li>
+    </ul>
+  </div>
+  <div class="es" data-hl="in">Ich schaffe <b>z'</b>Basel.</div>
+  <div class="es" data-hl="in der">Woned Si <b>i de</b> Schwiiz?</div>
+  <div class="es" data-hl="aus">Ich bi <b>vo</b> Amerika.</div>
+  <div class="es" data-hl="in">Schaffsch du <b>in</b> Züri?</div>
+
+  <div class="box regola">
+    <h3>z' + infinito</h3>
+    <p>Corrisponde a <span class="de">zu</span> + infinito. I verbi separabili restano due parole: <span class="ch">känne z'lärne</span> = <span class="de">kennenzulernen</span>.</p>
+  </div>
+  <div class="es" data-hl="kennenzulernen">Fröit mich, Si <b>känne z'lärne</b>.</div>
+
+  <div class="box regola">
+    <h3>Tu e Lei</h3>
+    <p><span class="ch">Si</span> + verbo al plurale per il Lei, <span class="ch">du</span> per il tu. Si passa al tu proponendo <span class="ch">Duzis</span>.</p>
+  </div>
+  <div class="es">Si chönd du zu mir säge.</div>
+  <div class="es">Wie gat's Ine?</div>
+  <div class="es">Wie gat's?</div>
+
+  <div class="box confronto">
+    <div class="etichetta">Confronto sistematico</div>
+    <h3><span class="de">Hochdeutsch</span> → <span class="ch">Schwiizerdütsch</span></h3>
+    <div class="tab"><table>
+      <tr><th>Hochdeutsch</th><th>Schwiizerdütsch</th><th>Esempi</th></tr>
+      <tr><td class="de">verbo secondo / primo / in fondo</td><td class="ch">uguale</td><td><i class="p">Sind Sie aus Basel?|Sind Si vo Basel?</i></td></tr>
+      <tr><td class="de">infinito + modale in fondo</td><td class="ch">modale + infinito</td><td><i class="p">erledigen will|wott erledige</i></td></tr>
+      <tr><td class="de">relativo der/die/das</td><td class="ch">wo</td><td><i class="p">der in Bern wohnt|wo z'Bärn wont</i></td></tr>
+      <tr><td class="de">in + città</td><td class="ch">z' + città</td><td><i class="p">in Bern|z'Bärn</i></td></tr>
+      <tr><td class="de">aus</td><td class="ch">vo</td><td><i class="p">aus Boston|vo Boston</i></td></tr>
+      <tr><td class="de">zu + infinito</td><td class="ch">z' + infinito</td><td><i class="p">kennenzulernen|känne z'lärne</i></td></tr>
+      <tr><td class="de">gerade, beim + infinito</td><td class="ch">am + infinito</td><td><i class="p">ich esse gerade|ich bi am Ässe</i></td></tr>
+      <tr><td class="de">gehen + infinito</td><td class="ch">gaa go + infinito</td><td><i class="p">ich gehe essen|ich gaa go ässe</i></td></tr>
+      <tr><td class="de">nicht, kein</td><td class="ch">nöd, käi</td><td><i class="p">nicht wahr?|nöd wahr?</i></td></tr>
+    </table></div>
+  </div>
+
+  <div class="box prova" id="quiz-ordine">
+    <div class="etichetta">Prova tu <span class="punti"></span></div>
+    <h3>Rimetti in ordine la frase svizzera</h3>
+    <div class="domanda de"></div>
+    <div class="risposta parole" id="ordine-risposta"></div>
+    <div class="parole" id="ordine-parole"></div>
+    <div class="esito"></div>
+  </div>
+</section>
+
+<!-- ============================ SU MISURA ============================ -->
+<section id="su-misura">
+  <h2>Esercizi su misura</h2>
+  <div class="box regola">
+    <p>Scegli tema, verbi e forme da allenare: Gemini prepara un dialogo e gli esercizi con il lessico delle tue carte, in grafia Dieth. Sono testi generati: se una forma ti sembra strana, controllala con la grammatica.</p>
+  </div>
+
+  <div class="box confronto modulo">
+    <div class="etichetta">Chiave API di Google AI Studio</div>
+    <p><input id="chiave" type="password" placeholder="Incolla qui la chiave" autocomplete="off" spellcheck="false">
+      <button class="pulsante" id="salva-chiave">Salva</button> <button class="pulsante" id="cancella-chiave">Cancella</button></p>
+    <p>Modello <input id="modello" list="modelli" spellcheck="false"><datalist id="modelli"></datalist></p>
+    <p class="sotto" id="stato-chiave">La chiave resta solo in questo browser: non è nel codice e non va su GitHub.</p>
+  </div>
+
+  <div class="box prova modulo">
+    <div class="etichetta">Che cosa vuoi allenare</div>
+    <label>Tema lessicale <input id="r-tema" placeholder="es. al ristorante, il lavoro, il tempo libero"></label>
+    <label>Verbi <input id="r-verbi" placeholder="es. chöne, wele, gaa"></label>
+    <p>Forme grammaticali</p>
+    <div class="spunte" id="r-forme">
+      <label><input type="checkbox" value="plurale verbale unico in -ed (mir/ir/si woned)">plurale in -ed</label>
+      <label><input type="checkbox" value="perfetto con haa/sii e participi con g- (niente preterito)">perfetto</label>
+      <label><input type="checkbox" value="congiuntivo II di cortesia: wett, hätt, chönt, törft">congiuntivo di cortesia</label>
+      <label><input type="checkbox" value="pronomi atoni e fusi col verbo (häsch, chasch, wämmer, Chönti)">pronomi atoni</label>
+      <label><input type="checkbox" value="articoli de/d'/s, en/e/es e dativo (em, de, emene, ere)">articoli e casi</label>
+      <label><input type="checkbox" value="pronomi personali e possessivi (mir/mer, Ine, min/mini/mis, Irere)">pronomi e possessivi</label>
+      <label><input type="checkbox" value="diminutivo in -li">diminutivo -li</label>
+      <label><input type="checkbox" value="ordine nella secondaria: modale prima dell'infinito (wott erledige), relativo wo">secondarie</label>
+      <label><input type="checkbox" value="luoghi e provenienza: z'Bärn, i de Schwiiz, vo Basel">z', i, vo</label>
+      <label><input type="checkbox" value="negazione nöd, käi">negazione</label>
+      <label><input type="checkbox" value="domande: wär, wäm, wo, wohi, vo wo, für was">domande</label>
+    </div>
+    <p>Tipi di esercizio</p>
+    <div class="spunte" id="r-tipi">
+      <label><input type="checkbox" value="dialogo" checked>dialogo</label>
+      <label><input type="checkbox" value="lacuna" checked>completa</label>
+      <label><input type="checkbox" value="scelta" checked>scelta multipla</label>
+      <label><input type="checkbox" value="traduzione" checked>traduci</label>
+      <label><input type="checkbox" value="ordine" checked>riordina</label>
+    </div>
+    <label>Quanti esercizi <select id="r-quanti"><option>6</option><option selected>10</option><option>15</option><option>20</option></select></label>
+    <label>Altre richieste <textarea id="r-note" rows="2" placeholder="es. dialogo tra due colleghi, usa il Lei"></textarea></label>
+    <p><button class="pulsante" id="genera">Genera</button></p>
+    <div class="esito" id="stato"></div>
+  </div>
+
+  <div id="risultato"></div>
+
+  <div class="box confronto">
+    <div class="etichetta">Esercizi già generati</div>
+    <div id="storico"></div>
+  </div>
+</section>
+
+</main>
+<script src="dati.js"></script>
+<script src="app.js"></script>
+<script src="esercizi.js"></script>
+</body>
+</html>

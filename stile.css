@@ -1,0 +1,164 @@
+@font-face {
+  font-family: "Biancoenero";
+  src: local("Biancoenero Regular"), url("font/Biancoenero-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* Colori: rosso = svizzero tedesco, blu = Hochdeutsch (come nelle carte Anki);
+   i riquadri hanno un colore per funzione: sabbia regola, giallo attenzione, verde prova tu, grigio confronto. */
+:root {
+  --ch: #c8102e;      --ch-bg: #fdecee;
+  --de: #1f6fb2;      --de-bg: #e7f0fa;
+  --testo: #222;      --tenue: #666;
+  --sfondo: #fbfaf7;  --carta: #ffffff;
+  --regola: #f3eee3;  --attenzione: #fff3cf;
+  --prova: #e3f3e6;   --confronto: #eceff3;
+  --ok: #1d7a3a;      --no: #b3261e;
+  --ipa: "Charis SIL", "Doulos SIL", "Segoe UI", "Noto Sans", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ch: #ff7a7a;      --ch-bg: #3a2326;
+    --de: #7cb8ff;      --de-bg: #1f2b3a;
+    --testo: #eee;      --tenue: #aaa;
+    --sfondo: #1b1b1d;  --carta: #242427;
+    --regola: #2f2b24;  --attenzione: #3a3320;
+    --prova: #1f3325;   --confronto: #2a2d33;
+    --ok: #6fd18f;      --no: #ff8a80;
+  }
+}
+:root[data-theme="dark"] {
+  --ch: #ff7a7a;      --ch-bg: #3a2326;
+  --de: #7cb8ff;      --de-bg: #1f2b3a;
+  --testo: #eee;      --tenue: #aaa;
+  --sfondo: #1b1b1d;  --carta: #242427;
+  --regola: #2f2b24;  --attenzione: #3a3320;
+  --prova: #1f3325;   --confronto: #2a2d33;
+  --ok: #6fd18f;      --no: #ff8a80;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--sfondo); color: var(--testo);
+  font-family: "Biancoenero", "Verdana", sans-serif; font-size: 18px; line-height: 1.6;
+}
+button, input, select { font: inherit; color: inherit; }
+
+header { max-width: 900px; margin: 0 auto; padding: 24px 16px 8px; }
+h1 { font-size: 30px; margin: 0; font-weight: normal; }
+h1 .ch { font-weight: normal; }
+.sotto { color: var(--tenue); margin: 2px 0 12px; }
+h2 { font-size: 24px; font-weight: normal; margin: 36px 0 12px; }
+h3 { font-size: 19px; font-weight: normal; margin: 0 0 8px; }
+
+nav {
+  position: sticky; top: 0; z-index: 5; background: var(--sfondo);
+  display: flex; gap: 6px; flex-wrap: wrap; max-width: 900px; margin: 0 auto; padding: 8px 16px;
+}
+nav button {
+  border: 0; border-radius: 10px; padding: 6px 14px; cursor: pointer; background: var(--confronto);
+}
+nav button.attivo { background: var(--testo); color: var(--sfondo); }
+
+.comandi { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 15px; color: var(--tenue); }
+.comandi button { border: 0; border-radius: 8px; padding: 3px 10px; cursor: pointer; background: var(--confronto); }
+.comandi button[aria-pressed="true"] { background: var(--testo); color: var(--sfondo); }
+.legenda span { display: inline-block; padding: 1px 8px; border-radius: 6px; margin-right: 2px; }
+
+main { max-width: 900px; margin: 0 auto; padding: 0 16px 60px; }
+section { display: none; }
+section.attivo { display: block; }
+
+/* riquadri */
+.box { border-radius: 12px; padding: 14px 16px; margin: 12px 0; background: var(--carta); }
+.box p { margin: 6px 0; }
+.box ul { margin: 6px 0; padding-left: 22px; }
+.regola { background: var(--regola); }
+.attenzione { background: var(--attenzione); }
+.prova { background: var(--prova); }
+.confronto { background: var(--confronto); }
+.etichetta { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--tenue); margin-bottom: 4px; }
+
+.ch { color: var(--ch); }
+.de { color: var(--de); }
+.ipa { font-family: var(--ipa); color: var(--ch); }
+b { font-weight: bold; }
+
+/* esempi: svizzero e Hochdeutsch affiancati, un clic mostra pronuncia e italiano */
+.es {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; cursor: pointer;
+  border-radius: 10px; padding: 8px 12px; margin: 6px 0; background: var(--carta);
+}
+.es .ch { font-size: 20px; }
+.es .de { font-size: 17px; align-self: center; }
+.es .pr, .es .it { grid-column: 1 / -1; display: none; font-size: 15px; }
+.es .pr { font-family: var(--ipa); color: var(--ch); }
+.es .it { color: var(--tenue); }
+.es.aperto .pr, .es.aperto .it,
+body.mostra-pr .es .pr, body.mostra-it .es .it { display: block; }
+body.nascondi-de .es .de { display: none; }
+body.nascondi-de .es { grid-template-columns: 1fr; }
+.es.extra::after {
+  content: "non nelle carte"; grid-column: 1 / -1; font-size: 12px; color: var(--tenue);
+}
+
+/* tabelle di corrispondenze e paradigmi */
+.tab { overflow-x: auto; margin: 8px 0; }
+table { border-collapse: separate; border-spacing: 3px; width: 100%; font-size: 16px; }
+th { font-weight: normal; text-align: left; color: var(--tenue); font-size: 14px; padding: 2px 8px; }
+td { padding: 5px 8px; border-radius: 6px; background: var(--carta); vertical-align: top; }
+td.ch { background: var(--ch-bg); }
+td.de { background: var(--de-bg); }
+.coppia { white-space: nowrap; }
+.coppia .freccia { color: var(--tenue); margin: 0 3px; }
+
+/* prova tu */
+.domanda { font-size: 22px; margin: 4px 0 8px; }
+.scelte { display: flex; flex-wrap: wrap; gap: 8px; }
+.scelte button, .prova .pulsante, .modulo .pulsante, .esercizio .pulsante {
+  border: 0; border-radius: 10px; padding: 6px 16px; cursor: pointer; background: var(--carta); font-size: 18px;
+}
+.scelte button.giusta { background: var(--ok); color: #fff; }
+.scelte button.sbagliata { background: var(--no); color: #fff; }
+.esito { min-height: 1.6em; color: var(--tenue); }
+.parole { display: flex; flex-wrap: wrap; gap: 6px; min-height: 44px; margin: 6px 0; }
+.parole button { border: 0; border-radius: 8px; padding: 4px 12px; cursor: pointer; background: var(--carta); color: var(--ch); font-size: 18px; }
+.risposta { border-radius: 10px; background: var(--carta); padding: 4px 8px; }
+.punti { float: right; font-size: 15px; color: var(--tenue); }
+
+/* coniugatore */
+.coniuga select { border: 0; border-radius: 8px; padding: 4px 8px; background: var(--carta); }
+.coniuga input {
+  width: 100%; min-width: 80px; border: 0; border-radius: 6px; padding: 2px 6px; background: var(--carta); color: var(--ch);
+}
+.coniuga td.giusta { outline: 2px solid var(--ok); }
+.coniuga td.sbagliata { outline: 2px solid var(--no); }
+
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+  .es { grid-template-columns: 1fr; }
+  .es .de { align-self: start; }
+}
+
+/* esercizi su misura */
+.modulo label { display: block; margin: 6px 0; }
+.modulo input:not([type=checkbox]), .modulo textarea, .modulo select, .esercizio input, .esercizio textarea {
+  border: 0; border-radius: 8px; padding: 5px 10px; background: var(--carta); width: 100%; max-width: 520px;
+}
+.modulo select { width: auto; }
+.modulo p { margin: 10px 0 4px; }
+.spunte { display: flex; flex-wrap: wrap; gap: 6px; }
+.spunte label { display: inline-flex; gap: 6px; align-items: center; margin: 0; background: var(--carta); border-radius: 8px; padding: 2px 10px; cursor: pointer; font-size: 16px; }
+.esercizio { background: var(--carta); }
+.esercizio .consegna { color: var(--tenue); font-size: 15px; }
+.esercizio .frase { font-size: 20px; margin: 6px 0; }
+.esercizio .frase input { width: 160px; display: inline-block; background: var(--ch-bg); color: var(--ch); }
+.esercizio .spiega { display: none; border-radius: 8px; background: var(--regola); padding: 6px 10px; margin-top: 8px; font-size: 16px; }
+.esercizio.fatto .spiega { display: block; }
+.esercizio.giusto { outline: 2px solid var(--ok); }
+.esercizio.sbagliato { outline: 2px solid var(--no); }
+.esercizio .parole button { background: var(--ch-bg); }
+.voce-storico { display: flex; gap: 8px; align-items: center; margin: 4px 0; }
+.voce-storico button { border: 0; border-radius: 8px; padding: 3px 10px; cursor: pointer; background: var(--carta); text-align: left; }
+.voce-storico .via { color: var(--tenue); }
